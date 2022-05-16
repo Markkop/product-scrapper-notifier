@@ -1,9 +1,9 @@
 export type Product = {
-  id: string | null;
-  title: string | null | undefined;
-  image: string | undefined;
+  id: string,
+  title: string,
+  image: string;
   showcase: string[];
-  url: string | null | undefined;
-  price: string | null | undefined;
+  url: string,
+  price: string,
   isAvailable: boolean;
 }

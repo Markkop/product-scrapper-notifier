@@ -1,5 +1,7 @@
 import { createProducts, deleteProducts, getProducts } from "./database"
 import { scrapWebsiteProducts } from "./scrap"
+import { sendProductToTelegram } from "./telegram"
+import { sleep } from "./utils"
 require('dotenv').config()
 
 async function main() {
@@ -9,12 +11,14 @@ async function main() {
     const scrappedProduct = scrappedProducts[index]
     const existingProduct = existingProducts?.find(product => product.id === scrappedProduct.id)
     if (!existingProduct) {
-      console.log("New product!")
+      await sendProductToTelegram(scrappedProduct, 'new')
+      sleep(1)
       continue
     }
 
     if (!existingProduct.isAvailable && scrappedProduct.isAvailable) {
-      console.log("Is now available!")
+      await sendProductToTelegram(scrappedProduct, 'now-available')
+      sleep(1)
     }
   }
   await deleteProducts()
