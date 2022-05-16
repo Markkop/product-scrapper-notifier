@@ -1,5 +1,9 @@
 # 🏪 Product Scrapper Notifier
 
-A small application that scraps a boardgame store website daily and notifies me on Telegram when there are new or restocked products
+[![Production Deploy](https://github.com/Markkop/product-scrapper-notifier/actions/workflows/prod.yml/badge.svg)](https://github.com/Markkop/product-scrapper-notifier/actions/workflows/prod.yml)
 
-![demo](https://user-images.githubusercontent.com/16388408/168511388-728f33f4-df8a-4477-bbec-80b67066df77.png)
+A small application that scraps a boardgame store website daily and notifies me on Telegram when there are new or restocked products.
+
+For personal use only.
+
+![demo](https://user-images.githubusercontent.com/16388408/168511605-c903b05a-427b-4c4f-b428-73d72fa31351.jpg)
