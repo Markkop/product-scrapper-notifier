@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "mongoose": "^6.3.3",
+    "puppeteer": "^14.1.0",
+    "ts-node": "^10.7.0"
   }
 }
