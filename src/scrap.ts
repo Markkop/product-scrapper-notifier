@@ -63,7 +63,7 @@ export async function scrapWebsiteProducts() {
   await page.goto(`${process.env.URL}/jogos/page/5/`, { waitUntil: 'networkidle2', timeout: 0 })
   let results: Product[] = []
   let hasNextPage = true
-  // while (hasNextPage) {
+  while (hasNextPage) {
     const products = await scrapProducts(page)
     results = results.concat(products)
     const nextPage = await scrapNextPage(page)
@@ -72,7 +72,7 @@ export async function scrapWebsiteProducts() {
     } else {
       hasNextPage = false
     }
-  // }
+  }
   console.log(`Scrapped a total of ${results.length} products`)
   await browser.close()
   return results
