@@ -1,5 +1,6 @@
 import { createProducts, deleteProducts, getProducts } from "./database"
 import { scrapWebsiteProducts } from "./scrap"
+require('dotenv').config()
 
 async function main() {
   const existingProducts = await getProducts()

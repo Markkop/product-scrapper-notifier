@@ -1,6 +1,5 @@
 import puppeteer, { Page } from 'puppeteer'
 import { Product } from './types'
-require('dotenv').config()
 
 async function scrapProducts(page: Page) {
   try {
