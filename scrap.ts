@@ -60,7 +60,7 @@ export async function scrapWebsiteProducts() {
     ]
   })
   const page = await browser.newPage()
-  await page.goto(`${process.env.URL}/jogos/page/1/`, { waitUntil: 'networkidle2', timeout: 0 })
+  await page.goto(`${process.env.URL}/jogos/page/5/`, { waitUntil: 'networkidle2', timeout: 0 })
   let results: Product[] = []
   let hasNextPage = true
   // while (hasNextPage) {

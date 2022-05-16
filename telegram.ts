@@ -9,33 +9,18 @@ const getAxiosInstance = () => axios.create({
   }
 });
 
-
-export async function sendTextToTelegram(text: string) {
-  try {
-    const chatId = process.env.TELEGRAM_USERID
-    const options = {
-      text, 
-      chat_id: chatId,
-      parse_mode: 'html',
-      disable_notification: true
-    }
-    await getAxiosInstance().post('/sendMessage', options)
-    return `Message sent to telegram's chat id ${chatId}`
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export async function sendPhotoToTelegram(photoUrl: string) {
+export async function sendPhotoWithCaptionToTelegram(photoUrl: string, caption: string, replyMarkup: any = undefined) {
   try {
     const chatId = process.env.TELEGRAM_USERID
     const options = {
       photo: photoUrl, 
       chat_id: chatId,
-      disable_notification: true
+      disable_notification: true,
+      caption,
+      parse_mode: 'html',
+      reply_markup: replyMarkup
     }
     await getAxiosInstance().post('/sendPhoto', options)
-    return `Photo sent to telegram's chat id ${chatId}`
   } catch (error) {
     console.log(error)
   }
@@ -47,7 +32,14 @@ const eventMessage: Record<string, string> = {
 }
 
 export async function sendProductToTelegram(product: Product, event: string) {
-  await sendPhotoToTelegram(product.image)
-  let text = `${eventMessage[event]}: ${product.title}`
-  await sendTextToTelegram(text)
+  const messageTitle = `<b>${eventMessage[event]}</b>: ${product.title}`
+  const priceText = Number(product.price).toLocaleString(
+    'pt-BR', 
+    { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }
+  )
+  await sendPhotoWithCaptionToTelegram(
+    product.image,
+    `${messageTitle}\n<b>Price</b>: ${priceText}`, 
+    { inline_keyboard: [[{ text: "Go to product", url: product.url }]] }
+  )
 }
