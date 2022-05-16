@@ -4,7 +4,7 @@ import { Product } from './types'
 async function scrapProducts(page: Page) {
   try {
     const products = await page.evaluate(getProducts)
-    console.log(`Scrapped ${products.length} products`)
+    console.log(`Scrapped ${products.length} products on page ${page.url()}`)
     return products
   } catch (error) {
     console.log(error)
