@@ -1,5 +1,5 @@
 import { connection, connect } from 'mongoose'
-import ProductModel from './ProductModel'
+import ProductModel from './productModel'
 import { Product } from './types'
 
 export async function connectDatabase () {
