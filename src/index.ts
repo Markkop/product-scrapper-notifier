@@ -20,6 +20,11 @@ async function main() {
       await sendProductToTelegram(scrappedProduct, 'now-available')
       sleep(1)
     }
+
+    if (existingProduct.isAvailable && !scrappedProduct.isAvailable) {
+      await sendProductToTelegram(scrappedProduct, 'now-unavailable')
+      sleep(1)
+    }
   }
   await deleteProducts()
   await createProducts(scrappedProducts)

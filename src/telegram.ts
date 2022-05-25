@@ -26,8 +26,25 @@ export async function sendPhotoWithCaptionToTelegram(photoUrl: string, caption: 
   }
 }
 
+export async function sendTextToTelegram(text: string) {
+  try {
+    const chatId = process.env.TELEGRAM_USERID
+    const options = {
+      text, 
+      chat_id: chatId,
+      parse_mode: 'html',
+      disable_notification: true
+    }
+    await getAxiosInstance().post('/sendMessage', options)
+    return `Message sent to telegram's chat id ${chatId}`
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const eventMessage: Record<string, string> = {
   'now-available': 'Now Available',
+  'now-unavailable': 'Out of Stock',
   'new': 'New Product'
 }
 
@@ -37,6 +54,12 @@ export async function sendProductToTelegram(product: Product, event: string) {
     'pt-BR', 
     { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }
   )
+
+  if (event === 'now-unavailable') {
+    await sendTextToTelegram(messageTitle)
+    return
+  }
+
   await sendPhotoWithCaptionToTelegram(
     product.image,
     `${messageTitle}\n<b>Price</b>: ${priceText}`, 
